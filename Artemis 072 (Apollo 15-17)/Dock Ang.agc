@@ -1,0 +1,42 @@
+			SETLOC	604
+			OCT	0			# VAC4USE
+GETRCANG	CA V0605		# Request the roll calibration angle from the user
+			TC BANKCALL
+			CADR E/BKCALL
+			CADR GOFLASH
+			TC ENDOFJOB
+			TC +2
+			TC GETRCANG
+			
+RCALC		CA RCONST	# LM Roll = 300 + RC - CSM Roll
+			AD DSPTEM1
+			EXTEND
+			SU CDUX
+			TS THETAD
+PCALC		CA PCONST	# LM Pitch = 180 + CSM Pitch
+			AD CDUY
+			TS THETAD +1
+YCALC		CA YCONST		# LM Yaw = 360 - CSM Yaw
+			EXTEND
+			SU CDUZ
+			TS THETAD +2
+
+DSPANGS		CA V0622		# Display calculated angles
+			TC BANKCALL
+			CADR E/BKCALL
+			CADR GOFLASH
+			TC ENDOFJOB
+			TC +2
+			TC DSPANGS
+ENDEMP		TC ENDOFJOB
+
+RCONST 		OCT 65253   	# 300 deg
+PCONST		OCT 40000   	# 180 deg
+YCONST		OCT 00000   	# 0 deg
+V0605		VN 0605
+V0622		VN 0622
+
+			SETLOC 1016		# N26 values
+			OCT 10001
+			OCT 605
+			OCT 14007

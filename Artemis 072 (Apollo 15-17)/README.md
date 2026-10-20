@@ -17,6 +17,6 @@ Calculates the docked LM IMU angles from the current CM IMU angles and an inputt
 - Verify N26 has been loaded successfully
 - Enter V30E
 - F 06 05 - Load roll cal angle
-- PRO to exit
+- PRO
 - F 06 22 - Copy calculated LM IMU angles
 - PRO to exit
